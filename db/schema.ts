@@ -1,7 +1,6 @@
-import { sqliteTable, integer, text, primaryKey, AnySQLiteColumn } from 'drizzle-orm/sqlite-core';
+import { sqliteTable, integer, text, AnySQLiteColumn } from 'drizzle-orm/sqlite-core';
 import { relations, sql } from 'drizzle-orm';
 
-// User table
 export const UserTable = sqliteTable('users', {
   id: integer('id').primaryKey(),
   name: text('name').notNull(),
@@ -10,7 +9,6 @@ export const UserTable = sqliteTable('users', {
   updatedAt: text('updated_at').notNull().default(sql`(CURRENT_TIMESTAMP)`).$onUpdate(() => sql`(CURRENT_TIMESTAMP)`)
 });
 
-// NotionFile table
 export const NotionFileTable = sqliteTable('notion_files', {
   id: integer('id').primaryKey(),
   coverPhoto: text('cover_photo').notNull(),
