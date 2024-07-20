@@ -67,8 +67,9 @@
           "name": "parent_file_id",
           "type": "integer",
           "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
+          "notNull": false,
+          "autoincrement": false,
+          "default": 0
         },
         "order": {
           "name": "order",

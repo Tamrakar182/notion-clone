@@ -9,7 +9,8 @@
     "ios": "expo run:ios",
     "web": "expo start --web",
     "test": "jest --watchAll",
-    "lint": "expo lint"
+    "lint": "expo lint",
+    "generate": "npx drizzle-kit generate"
   },
   "jest": {
     "preset": "jest-expo"
@@ -22,6 +23,7 @@
     "babel-plugin-inline-import": "^3.0.0",
     "drizzle-kit": "^0.23.0",
     "drizzle-orm": "^0.32.0",
+    "drizzle-zod": "^0.5.1",
     "expo": "~51.0.21",
     "expo-constants": "~16.0.2",
     "expo-drizzle-studio-plugin": "^0.0.2",

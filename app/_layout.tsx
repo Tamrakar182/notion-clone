@@ -1,22 +1,18 @@
 import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
-import { View, Text  } from 'react-native';
+import { View, Text } from 'react-native';
 import { useFonts } from 'expo-font';
 import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from 'react';
 import 'react-native-reanimated';
 
-import { drizzle } from "drizzle-orm/expo-sqlite";
-import { openDatabaseSync } from "expo-sqlite/next";
 import { useMigrations } from 'drizzle-orm/expo-sqlite/migrator';
-import migrations from '../drizzle/migrations';
 import { useDrizzleStudio } from "expo-drizzle-studio-plugin";
-import * as SQLite from "expo-sqlite";
-
-const expoDb = openDatabaseSync("db.db");
-const db = drizzle(expoDb);
+import { db, expoDB, migrations } from '@/drizzle';
 
 import { useColorScheme } from '@/hooks/useColorScheme';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { ActionSheetProvider } from '@expo/react-native-action-sheet';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -34,7 +30,7 @@ export default function RootLayout() {
 
   const { success, error } = useMigrations(db, migrations);
 
-  useDrizzleStudio(expoDb);
+  useDrizzleStudio(expoDB);
 
   if (error) {
     return (
@@ -57,11 +53,15 @@ export default function RootLayout() {
   }
 
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="+not-found" />
-      </Stack>
-    </ThemeProvider>
+    <ActionSheetProvider>
+      <GestureHandlerRootView>
+        <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+          <Stack>
+            <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+            <Stack.Screen name="+not-found" />
+          </Stack>
+        </ThemeProvider>
+      </GestureHandlerRootView>
+    </ActionSheetProvider>
   );
 }

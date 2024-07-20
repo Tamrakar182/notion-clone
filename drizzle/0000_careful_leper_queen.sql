@@ -7,7 +7,7 @@ CREATE TABLE `notion_files` (
 	`content` text NOT NULL,
 	`type` text NOT NULL,
 	`author_id` integer NOT NULL,
-	`parent_file_id` integer NOT NULL,
+	`parent_file_id` integer DEFAULT 0,
 	`order` integer DEFAULT 0,
 	`created_at` text DEFAULT (CURRENT_TIMESTAMP),
 	`updated_at` text DEFAULT (CURRENT_TIMESTAMP) NOT NULL,
